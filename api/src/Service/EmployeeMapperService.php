@@ -20,7 +20,7 @@ class EmployeeMapperService
         $employee = new Employee();
         $employee->setFirstName($data['first'] ?? '');
         $employee->setLastName($data['last'] ?? '');
-        $employee->setEmail($data['contact']['email'] ?? '');
+        $employee->setEmail($data['email_address'] ?? '');
         return $employee;
     }
 }
