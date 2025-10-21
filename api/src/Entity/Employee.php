@@ -4,10 +4,29 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\EmployeeRepository;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Post;
 use Doctrine\ORM\Mapping as ORM;
 
+use App\Controller\ProviderAController;
+use App\Controller\ProviderBController;
+
 #[ORM\Entity(repositoryClass: EmployeeRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    operations: [
+        new Get(),
+        new GetCollection(),
+        new Post(
+            uriTemplate: '/providerA/employees',
+            controller: ProviderAController::class
+        ),
+        new Post(
+            uriTemplate: '/providerB/employees',
+            controller: ProviderBController::class
+        )
+    ]
+)]
 class Employee
 {
     #[ORM\Id]
