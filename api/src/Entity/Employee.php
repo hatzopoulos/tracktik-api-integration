@@ -11,6 +11,8 @@ use Doctrine\ORM\Mapping as ORM;
 
 use App\Controller\ProviderAController;
 use App\Controller\ProviderBController;
+use App\Dto\ProviderAEmployeeInput;
+use App\Dto\ProviderBEmployeeInput;
 
 #[ORM\Entity(repositoryClass: EmployeeRepository::class)]
 #[ApiResource(
@@ -19,11 +21,13 @@ use App\Controller\ProviderBController;
         new GetCollection(),
         new Post(
             uriTemplate: '/providerA/employees',
-            controller: ProviderAController::class
+            controller: ProviderAController::class,
+            input: ProviderAEmployeeInput::class
         ),
         new Post(
             uriTemplate: '/providerB/employees',
-            controller: ProviderBController::class
+            controller: ProviderBController::class,
+            input: ProviderBEmployeeInput::class
         )
     ]
 )]
