@@ -3,12 +3,13 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
-use App\Repository\EmployeeRepository;
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
-use Doctrine\ORM\Mapping as ORM;
-
+use App\Repository\EmployeeRepository;
 use App\Controller\ProviderAController;
 use App\Controller\ProviderBController;
 use App\Dto\ProviderAEmployeeInput;

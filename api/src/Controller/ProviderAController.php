@@ -4,21 +4,21 @@ namespace App\Controller;
 
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Serializer\SerializerInterface;
-use App\Dto\ProviderAEmployeeInput;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Serializer\SerializerInterface;
+use Doctrine\ORM\EntityManagerInterface;
 use App\Service\EmployeeMapperService;
 use App\Service\TrackTikService;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Dto\ProviderAEmployeeInput;
 
 class ProviderAController
 {
     public function __construct(
-        private ?LoggerInterface $logger = null,
         private EmployeeMapperService $mapper,
         private TrackTikService $trackTik,
         private EntityManagerInterface $em,
-        private SerializerInterface $serializer
+        private SerializerInterface $serializer,
+        private ?LoggerInterface $logger = null,
     ) {}
 
     public function __invoke(Request $request): JsonResponse

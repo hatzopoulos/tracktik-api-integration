@@ -4,10 +4,12 @@ namespace App\Controller;
 
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Serializer\SerializerInterface;
 use App\Service\EmployeeMapperService;
 use App\Service\TrackTikService;
-use App\Dto\ProviderBEmployeeInput;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Dto\ProviderBEmployeeInput;
 
 class ProviderBController
 {
@@ -15,11 +17,23 @@ class ProviderBController
         private EmployeeMapperService $mapper,
         private TrackTikService $trackTik,
         private EntityManagerInterface $em,
+        private SerializerInterface $serializer,
         private ?LoggerInterface $logger = null
     ) {}
 
-    public function __invoke(ProviderBEmployeeInput $data): JsonResponse
+    public function __invoke(Request $request): JsonResponse
+    // public function __invoke(ProviderBEmployeeInput $data): JsonResponse
     {
+
+        $raw = $request->getContent();
+        try {
+            /** @var ProviderAEmployeeInput $data */
+            $data = $this->serializer->deserialize($raw, ProviderBEmployeeInput::class, 'json');
+        } catch (\Throwable $e) {
+            $this->logger?->error('deserialize failed', ['err' => $e->getMessage()]);
+            return new JsonResponse(['status' => 'error', 'message' => 'deserialize failed', 'err'=>$e->getMessage()], 400);
+        }
+
         // Map incoming DTO to Employee entity
         $employee = $this->mapper->mapFromProviderB($data);
 
@@ -48,8 +62,16 @@ class ProviderBController
 
         return new JsonResponse([
             'status' => 'ok',
+            'raw' => $raw,
             'tracktik_response' => $tracktikResponse,
             'employee_id' => $employee->getId(),
-        ]);
+            'dto_as_string' => (string)$data,
+            'dto_props' => [
+                'first' => $data->first,
+                'last' => $data->last,
+                'email_address' => $data->email_address,
+            ],
+        ], 200);
+
     }
 }
