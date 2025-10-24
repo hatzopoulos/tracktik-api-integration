@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+echo "Running console cache:clear"
+docker exec api-platform-410-php-1 php bin/console cache:clear
+
+echo "Running console cache:clear --env=dev"
+docker exec api-platform-410-php-1 php bin/console cache:clear --env=dev
+
+echo "Running console cache:warmup"
+docker exec api-platform-410-php-1 php bin/console cache:warmup
