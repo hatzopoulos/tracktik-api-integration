@@ -31,14 +31,14 @@ services:
             $encryptionKey: '%env(OAUTH_ENCRYPTION_KEY)%'
 
     # Add serializer normalizers
-    serializer.normalizer.object:
-        class: Symfony\Component\Serializer\Normalizer\ObjectNormalizer
-        arguments:
-            - '@serializer.mapping.class_metadata_factory'
-            - null
-            - '@property_accessor'
-            - '@property_info'
-        tags: [serializer.normalizer]
+    # serializer.normalizer.object:
+    #     class: Symfony\Component\Serializer\Normalizer\ObjectNormalizer
+    #     arguments:
+    #         - '@serializer.mapping.class_metadata_factory'
+    #         - null
+    #         - '@property_accessor'
+    #         - '@property_info'
+    #     tags: [serializer.normalizer]
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

@@ -18,8 +18,6 @@ api_platform:
         json:
             mime_types: ['application/merge-patch+json']
     mapping:
-        paths:
-            - '%kernel.project_dir%/src/Entity'
-            - '%kernel.project_dir%/src/Dto'
+        paths: ['%kernel.project_dir%/src/Entity', '%kernel.project_dir%/src/Dto']
     swagger:
         versions: [3]
