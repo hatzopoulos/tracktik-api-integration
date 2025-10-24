@@ -21,13 +21,15 @@ use App\Dto\ProviderBEmployeeInput;
         new GetCollection(),
         new Post(
             uriTemplate: '/providerA/employees',
-            controller: ProviderAController::class,
-            input: ProviderAEmployeeInput::class
+            controller: ProviderAController::class
+            ,input: ProviderAEmployeeInput::class
+            ,formats: ['json' => ['application/json']]
         ),
         new Post(
             uriTemplate: '/providerB/employees',
-            controller: ProviderBController::class,
-            input: ProviderBEmployeeInput::class
+            controller: ProviderBController::class
+            ,input: ProviderBEmployeeInput::class
+            ,formats: ['json' => ['application/json']]
         )
     ]
 )]

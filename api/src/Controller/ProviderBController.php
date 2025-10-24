@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Service\EmployeeMapperService;
 use App\Service\TrackTikService;
@@ -13,7 +14,8 @@ class ProviderBController
     public function __construct(
         private EmployeeMapperService $mapper,
         private TrackTikService $trackTik,
-        private EntityManagerInterface $em
+        private EntityManagerInterface $em,
+        private ?LoggerInterface $logger = null
     ) {}
 
     public function __invoke(ProviderBEmployeeInput $data): JsonResponse

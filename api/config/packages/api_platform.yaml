@@ -9,3 +9,17 @@ api_platform:
         stateless: true
         cache_headers:
             vary: ['Content-Type', 'Authorization', 'Origin']
+    # Configure supported formats
+    formats:
+        json:     ['application/json']
+        jsonld:   ['application/ld+json']
+    # Patch format configuration
+    patch_formats:
+        json:
+            mime_types: ['application/merge-patch+json']
+    mapping:
+        paths:
+            - '%kernel.project_dir%/src/Entity'
+            - '%kernel.project_dir%/src/Dto'
+    swagger:
+        versions: [3]

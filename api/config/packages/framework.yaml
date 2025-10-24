@@ -13,6 +13,11 @@ framework:
     #esi: true
     #fragments: true
 
+    serializer:
+        enable_attributes: true
+        mapping:
+            paths: ['%kernel.project_dir%/src/Entity', '%kernel.project_dir%/src/Dto']
+
 when@test:
     framework:
         test: true
